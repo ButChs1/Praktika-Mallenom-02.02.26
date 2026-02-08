@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { max-width: 650px; margin: 20px auto; padding: 0 20px; font-family: sans-serif; }
+        textarea { width: 100%; height: 150px; }
+        input { width: 100%; margin-bottom: 10px; }
+        .row { border-bottom: 1px solid #ccc; padding: 5px 0; display: flex; justify-content: space-between; }
+    </style>
+</head>
+<body>
+    <a href="/">← На сайт</a>
+    <h2>Управление контентом</h2>
+    
+    <form action="/update" method="POST">
+        <input name="title" value="{{ article[0] }}" placeholder="Заголовок">
+        <textarea name="content" placeholder="Текст статьи">{{ article[1] }}</textarea>
+        <input name="links" value="{{ article[2] or '' }}" placeholder="Ссылка на ресурс">
+        <button type="submit">Сохранить всё</button>
+    </form>
+
+    <h3>Модерация</h3>
+    {% for c in comments %}
+        <div class="row">
+            <span>{{ c[1] }}: {{ c[2][:30] }}...</span>
+            <a href="/del/{{ c[0] }}" style="color:red">Удалить</a>
+        </div>
+    {% endfor %}
+</body>
+</html>
